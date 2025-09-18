@@ -30,16 +30,16 @@ const uint8_t fnd_dataExamples [DECIMAL_MAXCNT] = {FND_ZERO, FND_ONE, FND_TWO,
 void fnd_Update_serialInput_FF()
 {
 	// high->low 만 보장하기에 첫 상태로 인한 변화 보장 안될수도 -> todo : 확인필요!
-	HAL_GPIO_WritePin(PROTO_FND_SCLK_GPIO_Port, PROTO_FND_SCLK_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(PROTO_FND_SCLK_GPIO_Port, PROTO_FND_SCLK_Pin, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(PROTO_FND_SCLK_GPIO_Port, PROTO_FND_SCLK_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(SCLK_PORT, SCLK_PIN, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(SCLK_PORT, SCLK_PIN, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(SCLK_PORT, SCLK_PIN, GPIO_PIN_RESET);
 }
 
 void fnd_Update_parallelOutput_FF()
 {
-	HAL_GPIO_WritePin(PROTO_FND_RCLK_GPIO_Port, PROTO_FND_RCLK_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(PROTO_FND_RCLK_GPIO_Port, PROTO_FND_RCLK_Pin, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(PROTO_FND_RCLK_GPIO_Port, PROTO_FND_RCLK_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(RCLK_PORT, RCLK_PIN, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(RCLK_PORT, RCLK_PIN, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(RCLK_PORT, RCLK_PIN, GPIO_PIN_RESET);
 }
 
 void fnd_blankAll()
@@ -64,8 +64,8 @@ void fnd_init(void)
 	}
 
 	// 3. clk 상태 초기화 -> 첫 비트의 상승엣지 보장
-	HAL_GPIO_WritePin(PROTO_FND_SCLK_GPIO_Port, PROTO_FND_SCLK_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(PROTO_FND_RCLK_GPIO_Port, PROTO_FND_RCLK_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(SCLK_PORT, SCLK_PIN, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(RCLK_PORT, RCLK_PIN, GPIO_PIN_RESET);
 
 	// 4. led on
 	fnd_onLED();
@@ -98,9 +98,9 @@ void fnd_send_8Bit(uint8_t data4send)
 	for(int8_t i = 8; i > 0; i--)
 	{
 		if (EXTRACT_MSB(data4send))
-			HAL_GPIO_WritePin(PROTO_FND_DIO_GPIO_Port, PROTO_FND_DIO_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DIO_PORT, DIO_PIN, GPIO_PIN_SET);
 		else
-			HAL_GPIO_WritePin(PROTO_FND_DIO_GPIO_Port, PROTO_FND_DIO_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(DIO_PORT, DIO_PIN, GPIO_PIN_RESET);
 
 		data4send <<= 1;
 		fnd_Update_serialInput_FF();

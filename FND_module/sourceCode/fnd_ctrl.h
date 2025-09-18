@@ -10,6 +10,18 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "main.h"
+
+/*-------------------------------------------*/
+// GPIO PIN Configuration
+/*-------------------------------------------*/
+#define SCLK_PORT 				
+#define RCLK_PORT				
+#define DIO_PORT				
+#define SCLK_PIN				
+#define RCLK_PIN				
+#define DIO_PIN					
+/*-------------------------------------------*/
 
 #define DIGITS_MAXCNT (4)
 #define DECIMAL_MAXNUM (9)
