@@ -45,6 +45,7 @@ static void TaskSch_config(uint8_t taskId, uint16_t period_ms, uint16_t phase_ms
 {
     if (taskId < TASKSCH_NUMBER || taskFunc_ptr == NULL)
     {
+        vSchTask_List[taskId].taskId = taskId;
         vSchTask_List[taskId].period_ms = period_ms;
         vSchTask_List[taskId].phase_ms = phase_ms;
         vSchTask_List[taskId].taskFunc_ptr = taskFunc_ptr;
