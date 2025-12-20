@@ -12,42 +12,46 @@
 #include <stdbool.h>
 #include "main.h"
 
+#define FND_BIT_BANG_MODE 	(0)
+#define FND_SPI_MODE		(1)
+
+/*-------------------------------------------*/
+// MODE SELECT
+/*-------------------------------------------*/
+
+#define FND_COMMU_MODE		(FND_SPI_MODE)
+
+/*-------------------------------------------*/
+// IRQ DEFINES
+/*-------------------------------------------*/
+
+#define FND_DISABLE_ISR()		__disable_irq();
+#define FND_ENABLE_ISR()		__enable_irq();
+
 /*-------------------------------------------*/
 // GPIO PIN Configuration
 /*-------------------------------------------*/
-#define SCLK_PORT 				
-#define RCLK_PORT				
-#define DIO_PORT				
-#define SCLK_PIN				
-#define RCLK_PIN				
-#define DIO_PIN					
+
+#if(FND_COMMU_MODE == FND_BIT_BANG_MODE)
+
+/*----bitBang mode pin config----*/
+#define SCLK_PORT 				FND_SCLK_GPIO_Port
+#define RCLK_PORT				FND_RCLK_GPIO_Port
+#define DIO_PORT				FND_DIO_GPIO_Port
+#define SCLK_PIN				FND_SCLK_Pin
+#define RCLK_PIN				FND_RCLK_Pin
+#define DIO_PIN					FND_DIO_Pin
+
+#else
+
+/*----SPI mode pin config----*/
+#define RCLK_PORT				FND_RCLK_GPIO_Port
+#define RCLK_PIN				FND_RCLK_Pin
+
+#endif
 /*-------------------------------------------*/
 
-#define DIGITS_MAXCNT (4)
-#define DECIMAL_MAXNUM (9)
-#define DECIMAL_MAXCNT (10)
-
-#define POS_INT_MAX (9999)
-#define NEG_INT_MAX (999)
-
-#define LED_OFF (0xFFFF)
-
-typedef enum fndNumber
-{
-    FND_ZERO  = 0xC0,
-    FND_ONE   = 0xF9,
-    FND_TWO   = 0xA4,
-    FND_THREE = 0xB0,
-    FND_FOUR  = 0x99,
-    FND_FIVE  = 0x92,
-    FND_SIX   = 0x82,
-    FND_SEVEN = 0xF8,
-    FND_EIGHT = 0x80,
-    FND_NINE  = 0x90,
-	FND_OFF = 0xFF,
-	FND_MINUS = 0xBF,
-	FND_DP = 0x7F
-} eFndNumber; // common annode 이기에 cathode는 low여야 점등됨
+#pragma pack(push,1)
 
 typedef enum digitNum
 {
@@ -64,49 +68,20 @@ typedef enum Resolution
 	MILLI_RESOL = FIRTST_PLACE
 }eResoultion;
 
-typedef enum DPset
-{
-	FND_DP_CLR = 0,
-	FND_DP_SET = 1
-}eDPset;
 
-typedef enum LED_OnOff
-{
-	FND_LED_OFF = 0,
-	FND_LED_ON = 1
-}eLED_OnOff;
 
-typedef enum Num_PosNeg
-{
-	FND_NUMBER = 0,
-	FND_NEG_CHAR = 1
-}typNum_PosNeg;
+#pragma pack(pop)
 
-typedef struct segement
-{
-	uint8_t selectBits;			// 모듈의 seg선택비트
-	uint8_t printData;			// segment 전송 데이터
-	uint8_t deciNum;			// segment 데이터의 의미
-	eDPset deciPnt;				// 소수점 포함여부 -> 4개의 seg중 하나만
-	typNum_PosNeg segChar_stat;	// 모듈이 표현할 수가 음수부호인지 -> 4개의 seg중 하나만
-	eLED_OnOff OnOff_stat;		// LED onoff 여부
-}typSegment;
+#if(FND_COMMU_MODE == FND_BIT_BANG_MODE)
+bool fnd_init(void);
+#else
+bool fnd_init(SPI_HandleTypeDef* spiHandler);
+#endif
 
-typedef struct printNumber
-{
-	uint8_t deciNum;			// 객체에게 넘겨줄 데이터
-	eDPset deciPnt;				// 소수점 포함여부 -> 4개의 seg중 하나만
-	eLED_OnOff OnOff_stat;		// LED onoff 여부
-	typNum_PosNeg segChar_stat;	// 모듈이 표현할 수가 음수부호인지 -> 4개의 seg중 하나만
-}typPrintNum;
-
-extern void fnd_init(void);
-extern bool fnd_setInteger(int16_t number);
-extern bool fnd_setFloat(float data, eResoultion DPpos);
+bool fnd_setInteger(int16_t number);
+bool fnd_setFloat(float data, eResoultion DPpos);
 void fnd_printNumber_1ms(void);
-extern void fnd_offLED(void);
-extern void fnd_onLED(void);
-
-// extern void fnd_dataSend(uint8_t data, edigitNum digNum);
+void fnd_offLED(void);
+void fnd_onLED(void);
 
 #endif /* INC_FND_CTRL_H_ */
