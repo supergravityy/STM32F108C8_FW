@@ -77,7 +77,7 @@ void userTask01(void)
 #ifdef TASKSCH_USE_MEASUERING
 	TaskSch_getCounter(&vTaskInfos[TASKSCH_ID_01].typTempInfo.startTick);
 #endif
-
+	
 	vTaskInfos[TASKSCH_ID_01].taskCnt++;
 
 #ifdef TASKSCH_USE_MEASUERING
@@ -106,7 +106,6 @@ void userTask03(void)
 	TaskSch_getCounter(&vTaskInfos[TASKSCH_ID_03].typTempInfo.startTick);
 #endif
 
-	for(int i = 0; i < 1200; i++);
 	vTaskInfos[TASKSCH_ID_03].taskCnt++;
 
 #ifdef TASKSCH_USE_MEASUERING
@@ -121,7 +120,6 @@ void userTask04(void)
 	TaskSch_getCounter(&vTaskInfos[TASKSCH_ID_04].typTempInfo.startTick);
 #endif
 
-	for(int i = 0; i < 50000; i++);
 	vTaskInfos[TASKSCH_ID_04].taskCnt++;
 
 #ifdef TASKSCH_USE_MEASUERING

@@ -17,6 +17,8 @@
 #define CRIT_ERR() {}
 #endif
 
+typExecTimer TaskSch_execClock;
+
 static typSchTask vSchTask_List[TASKSCH_NUMBER];
 
 static void TaskSch_config(uint8_t taskId, uint16_t period_ms, uint16_t phase_ms,
@@ -28,7 +30,9 @@ void TaskSch_init(void)
 
     // 1ms task
     TaskSch_config(TASKSCH_ID_00, 1, 0, userTask00);
-    TaskSch_config(TASKSCH_ID_01, 1, 10, userTask01);
+
+    // 2ms task
+    TaskSch_config(TASKSCH_ID_01, 2, 0, userTask01);
 
     // 5ms task
     TaskSch_config(TASKSCH_ID_02, 5, 0, userTask02);
@@ -75,6 +79,37 @@ void TaskSch_execTask(void)
 		{
 			// do nothing
 		}
+	}
+}
+
+void TaskSch_updateExecClock(void)
+{
+	// execute in 1ms timer interrupt
+
+	TaskSch_execClock.mili_sec++;
+
+	if(TaskSch_execClock.mili_sec >= 1000)
+	{
+		TaskSch_execClock.mili_sec = 0;
+		TaskSch_execClock.sec++;
+	}
+
+	if(TaskSch_execClock.sec >= 60)
+	{
+		TaskSch_execClock.sec = 0;
+		TaskSch_execClock.min++;
+	}
+
+	if(TaskSch_execClock.min >= 60)
+	{
+		TaskSch_execClock.min = 0;
+		TaskSch_execClock.hour++;
+	}
+
+	if(TaskSch_execClock.hour >= 24)
+	{
+		TaskSch_execClock.hour = 0;
+		TaskSch_execClock.day++;
 	}
 }
 

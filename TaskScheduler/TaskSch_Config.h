@@ -8,7 +8,7 @@
 
 #include "main.h"
 
-extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim1;
 
 // Select whether to apply a syntax that allows you
 // to proactively detect the configuration when it is incorrect
@@ -26,7 +26,7 @@ extern TIM_HandleTypeDef htim2;
 
 // Please enter a timer object that has the criteria for the TASK cycle
 // ESSENTIAL
-#define TASKSCH_TIM_HANDLER		(&htim2)
+#define TASKSCH_TIM_HANDLER		(&htim1)
 
 // Please enter how many TASKs you want to make
 // ESSENTIAL
