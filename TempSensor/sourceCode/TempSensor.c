@@ -112,8 +112,8 @@ static bool tempSensor_recoverPrevResol(void);
 static bool tempSensor_stopAllProcess(void);
 
 const typTempSens_resolInfo vTempSens_resolInfo[4] =
-    {{(uint8_t)9u, 0.5f, (uint8_t)200u}, {(uint8_t)10u, 0.25f, (uint8_t)200u}
-    , {(uint8_t)11u, 0.125f, (uint8_t)200u}, {(uint8_t)12u, 0.0625f, (uint8_t)200u}};
+    {{(uint8_t)9u, 0.5f, (uint8_t)TEMPSENS_9BIT_RESOL_WAIT_5msTick}, {(uint8_t)10u, 0.25f, (uint8_t)TEMPSENS_10BIT_RESOL_WAIT_5msTick}
+    , {(uint8_t)11u, 0.125f, (uint8_t)TEMPSENS_11BIT_RESOL_WAIT_5msTick}, {(uint8_t)12u, 0.0625f, (uint8_t)TEMPSENS_12BIT_RESOL_WAIT_5msTick}};
 
 const typTempSens_CMDqueueInfo vTempSens_cmdQInfo[TEMPSENS_CMDIDX_ARR_SIZE] =
     {{TEMPSENS_CMD_SKIP_ROM_FIND, 1, NULL}, {TEMPSENS_CMD_CONVERT_TEMPER, 17, tempSensor_convTemper}, {TEMPSENS_CMD_READ_SCRATCHPAD, 13, tempSensor_readScratchPad}, 
