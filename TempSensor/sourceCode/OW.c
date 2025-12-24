@@ -247,10 +247,7 @@ static void oneWire_reset(typOneWire* oneWire_obj)
 static void oneWire_recoveryBus(typOneWire *oneWire_obj)
 {
     // reset 과정 중, presence pulse 대기시간 동안 버스가 high 상태로 고정되어 있는지 확인
-    // 만약 고정되어있다면, 온도센서가 gnd를 인가하지 못함 -> 풀업저항이 걸려버림 -> 단선상황
-
-    // read 중간에 단선상황이 발생 -> 상위계층에서 CRC값 오류 발생 -> 읽기 재요청 -> reset 펄스 -> 단선확인가능
-    // write 중간에 단선상황이 발생 -> write 완료 -> 스크래치패드를 다시읽기 -> reset 펄스 -> 단선확인가능
+    // 만약 고정되어있다면, 온도센서가 gnd를 인가하지 못함 -> 풀업저항이 걸려버림 -> 온도센서 이상
 
     oneWire_reset(oneWire_obj);
 
