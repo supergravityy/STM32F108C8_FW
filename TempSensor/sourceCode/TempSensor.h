@@ -37,10 +37,12 @@ typedef enum tempSensor_errCode // tempsens -> user
 /*-----user API-----*/
 void tempSens_stMachine_init(void);
 void tempSensor_100ms(void);
-bool tempSens_isReady_forReq(void);
+bool tempSensor_isReady_forReq(void);
 bool tempSensor_reqCommand(typCmd_tempSens cmd, uint8_t *param, bool* reqFailed); 
 float tempSensor_getTemper_celcius(void);
 float tempSensor_getTemper_fahrenheit(void);
 uint8_t tempSensor_getResolution(void);
 typTempSens_errCode tempSensor_getErrCode(void);
 
+extern void oneWire_stMachine_init(GPIO_TypeDef *GPIOx, uint16_t DIO_Pin, TIM_HandleTypeDef *htimX);
+extern void oneWire_5ms(void);

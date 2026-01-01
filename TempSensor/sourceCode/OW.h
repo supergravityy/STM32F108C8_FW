@@ -46,4 +46,4 @@ uint8_t oneWire_getCmdQ_reservNum(void);
 bool oneWire_isReady_forGettingCmd(void); // 상위계층에서 enqueue를 할 준비가 되었는지를 확인가능
 typStatesOW oneWire_getState(void);
 void oneWire_stMachine_init(GPIO_TypeDef *GPIOx, uint16_t DIO_Pin, TIM_HandleTypeDef *htimX);
-void oneWire_process_5ms(void); 
+void oneWire_5ms(void); 

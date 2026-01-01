@@ -695,7 +695,7 @@ void oneWire_stMachine_init(GPIO_TypeDef *GPIOx, uint16_t DIO_Pin, TIM_HandleTyp
         vOneWire_obj.initialized = true;
     }
 }
-void oneWire_process_5ms(void)
+void oneWire_5ms(void)
 {
     // 다른 할 것
     oneWire_stMachine();

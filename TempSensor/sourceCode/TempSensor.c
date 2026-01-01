@@ -839,7 +839,7 @@ typTempSens_errCode tempSensor_getErrCode(void)
 {
 	return vTempSensor_obj.errCode;
 }
-bool tempSens_isReady_forReq(void)
+bool tempSensor_isReady_forReq(void)
 {
     return (vTempSensor_obj.currCmd.cmd == TEMPSENS_CMD_WAIT) && (vTempSensor_obj.currState == TEMPSENS_STATE_IDLE);
 }
