@@ -1,0 +1,12 @@
+../Core/tester/logic_autoTester.c:60:20:LAT_receiveByte	8	static
+../Core/tester/logic_autoTester.c:94:6:HAL_UART_RxCpltCallback	16	static
+../Core/tester/logic_autoTester.c:106:6:LAT_send_data	96	static
+../Core/tester/logic_autoTester.c:139:6:LAT_wait_data	24	static,ignoring_inline_asm
+../Core/tester/logic_autoTester.c:178:6:LAT_update_Rxerr_bgn	4	static
+../Core/tester/logic_autoTester.c:194:6:LAT_update_Txerr_bgn	4	static
+../Core/tester/logic_autoTester.c:210:6:LAT_update_Rxerr_end	4	static
+../Core/tester/logic_autoTester.c:226:6:LAT_update_Txerr_end	4	static
+../Core/tester/logic_autoTester.c:244:6:LAT_handshake_begin	8	static
+../Core/tester/logic_autoTester.c:267:6:LAT_handshake_end	8	static
+../Core/tester/logic_autoTester.c:286:13:LAT_logic_test	4	static
+../Core/tester/logic_autoTester.c:297:16:LAT_process_superLoop	8	static

@@ -1,0 +1,7 @@
+../Core/userLogic_forTest/logic_test.c:63:6:logicTest_cnvrtTostr_andSend	1
+../Core/userLogic_forTest/logic_test.c:75:6:logicTest_TC0X	1
+../Core/userLogic_forTest/logic_test.c:93:6:logicTest_TC1X	1
+../Core/userLogic_forTest/logic_test.c:111:6:logicTest_TC2X	1
+../Core/userLogic_forTest/logic_test.c:129:6:logicTest_TC3X	1
+../Core/userLogic_forTest/logic_test.c:147:6:logicTest_TC4X	1
+../Core/userLogic_forTest/logic_test.c:167:6:LAT_logic_test	6
